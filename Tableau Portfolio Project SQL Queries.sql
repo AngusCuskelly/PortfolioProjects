@@ -56,3 +56,27 @@ From PortfolioProject..CovidDeaths
 --Where location = 'Australia'
 Group by Location, Population, date
 order by PercentPopulationInfected desc
+
+
+-- 5.
+
+
+Select location, SUM(cast(new_cases as int)) as TotalCaseCount
+From PortfolioProject..CovidDeaths
+--Where location = 'Australia'
+Where continent is null 
+and location not in ('World', 'European Union', 'International')
+Group by location
+order by TotalCaseCount desc
+
+
+-- 6.
+
+
+Select location, SUM(cast(new_vaccinations as int)) as TotalVaccinationCount
+From PortfolioProject..CovidVaccinations
+--Where location = 'Australia'
+Where continent is null 
+and location not in ('World', 'European Union', 'International')
+Group by location
+order by TotalVaccinationCount desc
