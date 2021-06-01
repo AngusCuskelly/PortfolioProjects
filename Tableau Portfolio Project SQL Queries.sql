@@ -6,10 +6,15 @@ Queries used for Tableau Project
 
 -- 1. 
 
-Select SUM(new_cases) as total_cases, SUM(cast(new_deaths as int)) as total_deaths, SUM(cast(new_deaths as int))/SUM(New_Cases)*100 as DeathPercentage
-From PortfolioProject..CovidDeaths
+Select SUM(dea.new_cases) as total_cases, SUM(cast(dea.new_deaths as int)) as total_deaths
+, SUM(cast(vac.new_vaccinations as int)) as total_vaccinations
+, SUM(cast(dea.new_deaths as int))/SUM(dea.New_Cases)*100 as DeathPercentage
+From PortfolioProject..CovidDeaths dea
+join PortfolioProject..CovidVaccinations vac
+on dea.location = vac.location 
+and dea.date = vac.date
 --Where location = 'Australia'
-where continent is not null 
+where dea.continent is not null 
 --Group By date
 order by 1,2
 
