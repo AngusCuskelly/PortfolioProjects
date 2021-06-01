@@ -85,3 +85,13 @@ Where continent is null
 and location not in ('World', 'European Union', 'International')
 Group by location
 order by TotalVaccinationCount desc
+
+
+-- 7.
+
+
+Select Location, MAX(cast(people_vaccinated_per_hundred as float)) as HighestVaccinationCount
+From PortfolioProject..CovidVaccinations
+--Where location not in ('World', 'European Union', 'International','Oceania', 'Africa', 'Asia')
+Group by Location
+order by HighestVaccinationCount desc
